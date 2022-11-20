@@ -1,44 +1,22 @@
 import React from "react";
+import dayjs from "dayjs";
 import morning from "./../../screenFirst/mainMorning.png";
 import evening from "./../../screenFirst/mainEvening.jpg";
 import afternoon from "./../../screenFirst/mainAfternoon.png";
 import night from "./../../screenFirst/mainNight.jpg";
 
-function Dateformat() {
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wedneyday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+function homepopup() {
+  // console.log(dayjs().format('h:mm A'))
+  // declare variable for using purpose 
+  const hour = dayjs().hour();
+  // const min = dayjs().minute();
+  // const month = dayjs().month();
+  // const date = dayjs().date();
+  // const day = dayjs().day();
+  // const year = dayjs().year();
 
-  const D = new Date();
-  const day = days[D.getDay()];
-  const date = D.getDate();
-  const month = months[D.getMonth()];
-  const year = D.getFullYear();
-  let hour = D.getHours();
-  let min = D.getMinutes();
-
-  let hoursInner = `${hour} : ${min}`;
-  let dateInner = `${day}, ${date} ${month} ${year}`;
+  let hoursInner = dayjs().format('h:mm A');
+  let dateInner = dayjs().format('dddd, D MMMM YYYY');
   let valueGreeting = [];
   let valueBackgrounds = [];
   if (hour <= 13) {
@@ -50,6 +28,8 @@ function Dateformat() {
   } else {
     valueBackgrounds.push(night);
   }
+
+  
 
   function GreetingMessage() {
     if (hour >= 5 && hour < 11) {
@@ -71,21 +51,18 @@ function Dateformat() {
     } else {
       //this is night sign
       let valueMassage =
-        "It's already dark now, you should take a rest for beautiful tomorrow";
+        "Get the fuck up";
       valueGreeting.push(valueMassage);
     }
   }
 
-  function gone1() {
-    document.querySelector(".just-greeting").style.transform = "scale(0)";
-  }
   return (
     <div
       style={{ backgroundImage: `url(${valueBackgrounds})` }}
       className="just-greeting"
     >
       <div className="secTime">
-        <span className="hours">{hoursInner}</span>
+        <span className="text-3xl font-bold underline">{hoursInner}</span>
         <span className="time">{dateInner}</span>
       </div>
       <div className="hero-section">
@@ -99,14 +76,8 @@ function Dateformat() {
           <span></span>
         </div>
       </div>
-      <div className="instruction-section">
-        <i onClick={gone1} className="material-icons">
-          fullscreen_exit
-        </i>
-        <span className="time">Click Icon or Swipe Up to continue</span>
-      </div>
     </div>
   );
 }
 
-export default Dateformat;
+export default homepopup;
